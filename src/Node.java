@@ -1,9 +1,7 @@
 package quadTreeIndex;
 
-
 import java.util.Arrays;
 import java.util.List;
-
 
 public class Node {
     public Node[] children = new Node[8];
@@ -18,7 +16,6 @@ public class Node {
     //public String nodeName = "Level"+levelNum+"_"+center.getX()+"_"+center.getY()+"_"+center.getZ();
     public String nodeName = "";
     public String[] childrenNodeName = new String[8];
-    
 
     public Node(double centerX, double centerY, double centerZ, float quadrantWidth) {
         this(new Point(centerX, centerY, centerZ), quadrantWidth);
@@ -61,21 +58,16 @@ public class Node {
     public String toString() {
     	String nodeInfor="";
     	if(leaf){
-    			nodeInfor = "Node{"+nodeName+ 
-			                "\n center=" + center +
-			                "\n children=" + (children == null ? null : Arrays.asList(children)) +
-			                "\n point=" + point +
-			                "\n leaf=" + leaf +
-			                "\n}\n";
+		nodeInfor = "Node{"+nodeName+ 
+				"\n center=" + center +
+				"\n children=" + (children == null ? null : Arrays.asList(children)) +
+				"\n point=" + point +
+				"\n leaf=" + leaf +
+				"\n}\n";
     	}else{
-    		//nodeInfor = "Node{ Level =" +levelNum +", predecessorIndex=" +predecessorIndex+", innerIndex=" +innerIndex+ ", quadrantWidth=" +quadrantWidth+
-    		//			"\n children="+(children == null ? null : Arrays.asList(children));
-    		nodeInfor = "Node{"+nodeName+ 
-						"\n children="+(children == null ? null : Arrays.asList(children));
-    	}
-    	
-    	return nodeInfor;
-    	
+    		nodeInfor = "Node{"+nodeName+"\n children="+(children == null ? null : Arrays.asList(children));
+    	}    	
+    	return nodeInfor;    	
     }
 
     protected int calculateQuadrantIndex(Point point, Point compareWith) {
@@ -103,18 +95,8 @@ public class Node {
     public Point getPoint() {
         return point;
     }
-
-    /**
-     * @param node
-     * @param leftBottomBack - Coord. f.e. 0,0,0
-     * @param rightTopFront  - Coord. f.e. 10,10,10
-     * @return
-     */
+    
     public void search(List<Point> result, Node node, Point leftBottomBack, Point rightTopFront) {
-    	//System.out.println("Search Node Level:"+node.levelNum+", predecessor index:"+node.predecessorIndex+", Node index:"+node.innerIndex);
-    	if(node.levelNum==3 && node.innerIndex==0){
-    		System.out.println("Node center: "+node.center);
-    	}
     	
     	if (node.isLeaf()) {
             Point quadPoint = node.getPoint();
@@ -150,10 +132,6 @@ public class Node {
                 center.getZ() + halfWidth < leftBottomBack.getZ()
         );
     }
-
-    /*private float halfWidth() {
-        return quadrantWidth / 2;
-    }*/
 
     Node getChild(int quadrantIndex) {
         return children[quadrantIndex];
