@@ -69,25 +69,48 @@ public class quadTreeIndex {
         return result;
     }
 
-
-    /**
-     * Traverses whole quad tree, allowing visitor to perform some operations on the node
-     * @param visitor
-     */
-    /*
-    public void visit(Visitor visitor) {
-        visit(visitor, searchSpace);
+    public Point nearestNeighbor(Point inputPoint) {
+    	int range = 1;   	
+    	List NN_Result = new ArrayList<Point>();
+    	do{
+	    	double x_LowBound = inputPoint.getX()-range;
+	    	double x_UpperBound = inputPoint.getX()+range;
+	    	double y_LowBound = inputPoint.getY()-range;
+	    	double y_UpperBound = inputPoint.getY()+range;
+	    	double z_LowBound = inputPoint.getZ()-range;
+	    	double z_UpperBound = inputPoint.getZ()+range;
+	    	Point searchStart = new Point(x_LowBound, y_LowBound, z_LowBound);
+	        Point searchEnd = new Point(x_UpperBound, y_UpperBound, z_UpperBound);        
+	        searchSpace.search(NN_Result, searchSpace, searchStart, searchEnd);
+	        range++;
+    	}while(NN_Result.size()==0);
+        
+    	Point closestPoint = (Point) NN_Result.get(0);
+    	double distance = dist(inputPoint,closestPoint);
+        
+        for(int i=0;i<NN_Result.size();i++){
+        	double tempDist = dist(inputPoint,(Point) NN_Result.get(i));
+        	if(tempDist<distance){
+        		distance = tempDist;
+        		closestPoint = (Point) NN_Result.get(i);
+        	}
+        }     
+        return closestPoint;
     }
-
-    private void visit(Visitor visitor, Node node) {
-        visitor.visit(node);
-        if (!node.isLeaf()) {
-            for (int quadIndex = 0; quadIndex < 8; quadIndex++) {
-                Node quadrant = node.getChild(quadIndex);
-                if (quadrant!=null) {
-                    visit(visitor, quadrant);
-                }
-            }
-        }
-    }*/
+    
+    public double dist(Point pointA,Point pointB){
+    	
+    	double pointA_x = pointA.getX();
+    	double pointA_y = pointA.getY();
+    	double pointA_z = pointA.getZ();
+    	double pointB_x = pointA.getX();
+    	double pointB_y = pointA.getY();
+    	double pointB_z = pointA.getZ();
+    	double diff_x = pointA_x - pointB_x;
+    	double diff_y = pointA_y - pointB_y;
+    	double diff_z = pointA_z - pointB_z;
+    	double dist = Math.sqrt(Math.pow(diff_x, 2)+Math.pow(diff_y, 2)+Math.pow(diff_z, 2));
+    	
+    	return dist;
+    }
 }
