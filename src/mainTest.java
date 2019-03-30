@@ -47,9 +47,14 @@ public class mainTest {
         for(int i = 0; i < foundPoints.size(); i++) {
             System.out.println(foundPoints.get(i).toString());
         }
-        System.out.println("There are "+foundPoints.size()+" points!");
-        System.out.println(timeElapsed1 + " milliseconds to find the result!");        
-        System.out.println(quad.toString());
-        //System.out.println("--==--total size: ");
+        System.out.println("There are "+foundPoints.size()+" points in the given range!");
+        System.out.println(timeElapsed1 + " milliseconds to find the range result!");
+        Point givenPoint = new Point(55,55,55);
+        long start2 = System.currentTimeMillis();
+        Point NN_Point = quad.nearestNeighbor(givenPoint);
+        long finish2 = System.currentTimeMillis();
+        long timeElapsed2 = finish2 - start2;
+        System.out.println("The NN point to the given "+givenPoint+" is: "+NN_Point);
+        System.out.println(timeElapsed1 + " milliseconds to find the NN point!");
 	}	
 }
