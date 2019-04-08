@@ -1,6 +1,3 @@
-package quadTreeIndex;
-
-import quadTreeIndex.Point;
 
 /*
  * A cube area divided from one center point

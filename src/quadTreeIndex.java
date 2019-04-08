@@ -1,11 +1,6 @@
-package quadTreeIndex;
-
 
 import java.util.ArrayList;
 import java.util.List;
-
-import quadTreeIndex.Node;
-import quadTreeIndex.Point;
 
 public class quadTreeIndex {
 	Node searchSpace;

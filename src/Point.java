@@ -1,5 +1,3 @@
-package quadTreeIndex;
-
 /*
  * Point object for handling 3D point information
  */
