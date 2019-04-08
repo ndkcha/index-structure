@@ -1,8 +1,9 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class quadTreeIndex {
+public class quadTreeIndex implements Serializable {
 	Node searchSpace;
 	int nodeCount=1;
 	

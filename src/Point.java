@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /*
  * Point object for handling 3D point information
  */
-public class Point {
+public class Point implements Serializable {
     private double x,y,z;
 
     public double getX() {

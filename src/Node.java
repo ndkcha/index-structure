@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class Node {
+public class Node implements Serializable {
     public Node[] children = new Node[8];
     public int levelNum = 0;
     public int innerIndex = 0;

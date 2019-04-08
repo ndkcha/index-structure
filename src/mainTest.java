@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.instrument.Instrumentation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,8 @@ public class mainTest {
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
         System.out.println(timeElapsed + " milliseconds to load the data!");
+
+        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 
         while (true) {
             System.out.println("Lower bound for the range: e.g. 50 50 50 (with spaces in between, -1 to exit)");
@@ -95,5 +98,5 @@ public class mainTest {
             System.out.println("The NN point to the given " + givenPoint + " is: " + NN_Point);
             System.out.println(timeElapsed2 + " milliseconds to find the NN point!");
         }
-	}	
+	}
 }
