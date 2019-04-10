@@ -1,42 +1,41 @@
 import java.io.*;
-import java.lang.instrument.Instrumentation;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class mainTest {
-	
-	public static void main(String[] args) throws FileNotFoundException {
-		// TODO Auto-generated method stub
-		int quadrantWidth = 1000;
-		quadTreeIndex quad = new quadTreeIndex(new Node(500, 500, 500, quadrantWidth));
-		long start = System.currentTimeMillis();		
-		Scanner scanner = new Scanner(new FileReader("data/LA2.txt"));
-		int k = 0;
-		while (scanner.hasNext()) {
-		    if (k % 100000 == 0) {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        // TODO Auto-generated method stub
+        int quadrantWidth = 1000;
+        quadTreeIndex quad = new quadTreeIndex(new Node(500, 500, 500, quadrantWidth));
+        long start = System.currentTimeMillis();
+        Scanner scanner = new Scanner(new FileReader("bin/LA2.txt"));
+        int k = 0;
+        while (scanner.hasNext()) {
+            if (k % 100000 == 0) {
                 System.out.println(k + " free: " + Runtime.getRuntime().freeMemory() / 1000000 + "MB left");
                 System.gc();
             }
-			String input3D_data = scanner.nextLine().trim();
-			double x = Double.parseDouble(input3D_data.substring(1, 9));
-			double y = Double.parseDouble(input3D_data.substring(11, 19));
-			double z = Double.parseDouble(input3D_data.substring(21, 29));
-			//System.out.print("x="+x);
-			//System.out.print(", y="+y);
-			//System.out.println(", z="+z);
+            String input3D_data = scanner.nextLine().trim();
+            double x = Double.parseDouble(input3D_data.substring(1, 9));
+            double y = Double.parseDouble(input3D_data.substring(11, 19));
+            double z = Double.parseDouble(input3D_data.substring(21, 29));
+            //System.out.print("x="+x);
+            //System.out.print(", y="+y);
+            //System.out.println(", z="+z);
             quad.addPoint(new Point(x,y,z));
             k++;
         }
 
         scanner.close();
-		scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
         System.out.println(timeElapsed + " milliseconds to load the data!");
 
-        System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+        System.gc();
+
+        System.out.println((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000);
 
         while (true) {
             System.out.println("Lower bound for the range: e.g. 50 50 50 (with spaces in between, -1 to exit)");
@@ -71,10 +70,11 @@ public class mainTest {
                 try {
                     System.out.println("File name: ");
                     String name = scanner.nextLine().trim();
-                    PrintWriter printWriter = new PrintWriter(new FileWriter("data/" + name + ".txt"));
+                    PrintWriter printWriter = new PrintWriter(new FileWriter("src/" + name + ".txt"));
                     for (int i = 0; i < foundPoints.size(); i++) {
                         printWriter.println(foundPoints.get(i).toString());
                     }
+                    printWriter.close();
                     System.out.println("Done! it's stored in data/" + name + ".txt");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -98,5 +98,5 @@ public class mainTest {
             System.out.println("The NN point to the given " + givenPoint + " is: " + NN_Point);
             System.out.println(timeElapsed2 + " milliseconds to find the NN point!");
         }
-	}
+    }
 }
