@@ -65,7 +65,7 @@ public class quadTreeIndex implements Serializable {
         return result;
     }
 
-    public Point nearestNeighbor(Point inputPoint) {
+    public List<Point> nearestNeighbor(Point inputPoint) {
     	int range = 1;   	
     	List NN_Result = new ArrayList<Point>();
     	do{
@@ -83,15 +83,21 @@ public class quadTreeIndex implements Serializable {
         
     	Point closestPoint = (Point) NN_Result.get(0);
     	double distance = dist(inputPoint,closestPoint);
+	List result = new ArrayList<Point>();
+    	result.add(closestPoint);
         
         for(int i=0;i<NN_Result.size();i++){
         	double tempDist = dist(inputPoint,(Point) NN_Result.get(i));
         	if(tempDist<distance){
         		distance = tempDist;
         		closestPoint = (Point) NN_Result.get(i);
+			result.clear();
+			result.add(closestPoint);
+        	}else if(tempDist==distance){
+        		result.add(NN_Result.get(i));
         	}
         }     
-        return closestPoint;
+        return result;
     }
     
     public double dist(Point pointA,Point pointB){
