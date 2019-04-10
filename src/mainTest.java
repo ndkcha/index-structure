@@ -13,7 +13,7 @@ public class mainTest {
         int k = 0;
         while (scanner.hasNext()) {
             if (k % 100000 == 0) {
-                System.out.println(k + " free: " + Runtime.getRuntime().freeMemory() / 1000000 + "MB left");
+                System.out.println(k);
                 System.gc();
             }
             String input3D_data = scanner.nextLine().trim();
@@ -35,7 +35,8 @@ public class mainTest {
 
         System.gc();
 
-        System.out.println((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000);
+        long indexSize = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 10000000;
+        System.out.println(indexSize + " MB");
 
         while (true) {
             System.out.println("Lower bound for the range: e.g. 50 50 50 (with spaces in between, -1 to exit)");
