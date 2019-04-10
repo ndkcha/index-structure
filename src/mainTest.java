@@ -92,10 +92,15 @@ public class mainTest {
             Point givenPoint = new Point(Integer.parseInt(pointContent[0]), Integer.parseInt(pointContent[1]),
                 Integer.parseInt(pointContent[2]));
             long start2 = System.currentTimeMillis();
-            Point NN_Point = quad.nearestNeighbor(givenPoint);
+            //Point NN_Point = quad.nearestNeighbor(givenPoint);
+            List<Point> NN_foundPoints = quad.nearestNeighbor(givenPoint);
             long finish2 = System.currentTimeMillis();
             long timeElapsed2 = finish2 - start2;
-            System.out.println("The NN point to the given " + givenPoint + " is: " + NN_Point);
+            //System.out.println("The NN point to the given " + givenPoint + " is: " + NN_Point);
+            System.out.println("The NN point to the given " + givenPoint + " is: ");
+            for (int i = 0; i < NN_foundPoints.size(); i++) {
+            	System.out.println(NN_foundPoints.get(i).toString());
+            }
             System.out.println(timeElapsed2 + " milliseconds to find the NN point!");
         }
     }
